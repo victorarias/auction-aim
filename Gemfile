@@ -32,6 +32,10 @@ end
 gem 'thin'
 gem 'message_bus'
 
-group :test do
+group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
