@@ -1,4 +1,6 @@
 config/database.yml
+dump.rdb
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
