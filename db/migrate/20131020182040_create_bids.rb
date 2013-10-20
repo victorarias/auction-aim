@@ -6,8 +6,11 @@ class CreateBids < ActiveRecord::Migration
       t.integer :amount, null: false
       t.boolean :reserve_met, null: false
       t.datetime :timestamp, null: false
+      t.integer :external_id, null: false
 
       t.timestamps
     end
+
+    add_index :bids, :external_id, :unique => true
   end
 end

@@ -17,15 +17,17 @@ ActiveRecord::Schema.define(version: 20131020182040) do
   enable_extension "plpgsql"
 
   create_table "bids", force: true do |t|
-    t.integer  "item_id"
-    t.string   "color"
-    t.integer  "amount"
-    t.boolean  "reserve_met"
-    t.datetime "timestamp"
+    t.integer  "item_id",     null: false
+    t.string   "color",       null: false
+    t.integer  "amount",      null: false
+    t.boolean  "reserve_met", null: false
+    t.datetime "timestamp",   null: false
+    t.integer  "external_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "bids", ["external_id"], name: "index_bids_on_external_id", unique: true, using: :btree
   add_index "bids", ["item_id"], name: "index_bids_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
