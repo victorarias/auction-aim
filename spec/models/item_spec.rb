@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe Item do
   describe "validations" do
     it { should validate_presence_of :title }
@@ -14,8 +13,8 @@ describe Item do
         id: 1,
         title: "title",
         reserve_met: false,
-        ends_at: 1.day.from_now,
-        published_at: 1.day.ago,
+        ends_at: 1382283120,
+        published_at: 1381414365,
         watched: false
       }
     end
