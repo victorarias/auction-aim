@@ -11,9 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20131020182040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bids", force: true do |t|
+    t.integer  "item_id"
+    t.string   "color"
+    t.integer  "amount"
+    t.boolean  "reserve_met"
+    t.datetime "timestamp"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bids", ["item_id"], name: "index_bids_on_item_id", using: :btree
+
+  create_table "items", force: true do |t|
+    t.boolean  "reserve_met",     null: false
+    t.integer  "estimate"
+    t.string   "title",           null: false
+    t.string   "description"
+    t.datetime "ends_at",         null: false
+    t.datetime "published_at",    null: false
+    t.integer  "transport_price"
+    t.boolean  "watched",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
