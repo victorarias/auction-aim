@@ -8,49 +8,29 @@ describe Item do
   end
 
   describe "importation" do
-    let(:raw) do
-      {
-        id: 1,
-        title: "title",
-        reserve_met: false,
-        ends_at: 1382283120,
-        published_at: 1381414365,
-        watched: false,
-        bids: [
-          {
-            external_id: 2,
-            color: "#2CC97A",
-            amount: 1000,
-            reserve_met: true,
-            timestamp: 1382282910
-          },
-          {
-            external_id: 1,
-            color: "#2CC97A",
-            amount: 800,
-            reserve_met: true,
-            timestamp: 1382282910
-          }
-        ]
-      }
+    let(:client) do
+      Auctionet::Client.new.tap do |client|
+        allow(client).to receive(:perform_request).and_return File.open("spec/assets/items.json").read
+      end
     end
 
     it "import a raw item" do
       expect do
-        Item.import raw
+        Item.import(client)
       end.to change(Item, :count).by 1
     end
 
     it "does not duplicate items" do
       expect do
-        Item.import raw
-        Item.import raw
+        Item.import client
+        Item.import client
       end.to change(Item, :count).by 1
     end
 
     it "imports nested bids" do
-      item = Item.import raw
-      expect(item.bids.size).to be 2
+      expect do
+        Item.import client
+      end.to change { Bid.count }
     end
   end
 end

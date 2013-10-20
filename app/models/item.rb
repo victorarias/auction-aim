@@ -1,17 +1,22 @@
+require 'auctionet/client'
+
 class Item < ActiveRecord::Base
   has_many :bids
   accepts_nested_attributes_for :bids
 
   validates_presence_of :title, :ends_at, :published_at
 
-
   class << self
-    def import(raw)
-      return if Item.where(id: raw[:id]).any?
+    def import(client = Auctionet::Client.new)
+      client.fetch.each do |raw|
+        sanitized = sanitize(raw)
 
-      sanitized = sanitize(raw)
-      Item.new(sanitized).tap do |item|
-        item.save!
+        next if Item.where(id: sanitized[:id]).count > 0
+
+        Item.new(sanitized).tap do |item|
+          item.watched = false
+          item.save!
+        end
       end
     end
 

@@ -5,7 +5,6 @@ describe Bid do
     it { should validate_presence_of :item_id }
     it { should validate_presence_of :color }
     it { should validate_presence_of :amount }
-    it { should validate_presence_of :reserve_met }
     it { should validate_presence_of :timestamp }
   end
 end
