@@ -4,15 +4,20 @@ module Auctionet; end
 class Auctionet::Client
   def fetch
     data = JSON.parse perform_request
-    data["items"]
+    clear_data(data, :items)
   end
 
   def fetch_item id
     data = JSON.parse perform_request id
-    data["item"]
+    clear_data(data, :item)
   end
 
   private
+
+  def clear_data(data, root)
+    data.symbolize_keys!
+    data[root]
+  end
 
   def perform_request(param = nil)
     suffix = if param

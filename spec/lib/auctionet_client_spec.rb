@@ -20,7 +20,7 @@ describe Auctionet::Client do
   describe "#fetch_item" do
     before(:each) do
       sample = File.read "spec/assets/item.json"
-      allow(subject).to receive(:perform_request).and_return sample
+      allow(subject).to receive(:perform_request).with(1).and_return sample
     end
 
     it "fetch a single item" do
