@@ -1,5 +1,5 @@
 namespace :app do
   task import: :environment do
-    Item.import
+    ItemImporter.new.run
   end
 end
