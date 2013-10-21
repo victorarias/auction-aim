@@ -4,7 +4,9 @@ AuctionAim::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'items#index'
-  get 'home' => 'items#index'
+  get   'home'        => 'items#index'
+  post  'watch/:id'   => 'items#watch'
+  post  'unwatch/:id' => 'items#unwatch'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

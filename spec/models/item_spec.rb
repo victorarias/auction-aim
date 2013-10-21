@@ -56,4 +56,20 @@ describe Item do
       expect(subject.main_thumb).to eq "path1"
     end
   end
+
+  describe "#watch" do
+    it "makes it watched" do
+      expect do
+        subject.watch
+      end.to change { subject.watched }.to true
+    end
+  end
+
+  describe "#unwatch" do
+    it "makes it unwatched" do
+      expect do
+        subject.unwatch
+      end.to change { subject.watched }.to false
+    end
+  end
 end

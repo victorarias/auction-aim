@@ -1,15 +1,33 @@
-<h1>Items</h1>
+<section id="watched">
+  <h1>Watched Items</h1>
 
-<% @unwatched.each do |item| %>
-  <div>
-    <p><%= item.title %></p>
-    <%= image_tag item.main_thumb %>
-    <ul>
-      <% item.bids.each do |bid| %>
-        <li>
-          <%= bid.amount %> SEK - <%= bid.timestamp %>
-        </li>
+  <% if @watched.empty? %>
+    <p class="message">Select items to watch.</p>
+  <% else %>
+    <% @watched.each do |item| %>
+      <div class="item">
+        <p><%= item.title %></p>
+        <%= form_tag "/unwatch/#{item.id}", method: :post do %>
+          <%= button_tag "Unwatch" %>
+        <% end %>
+        <%= image_tag item.main_thumb %>
+     </div>
+    <% end %>
+  <% end %>
+</section>
+
+<section id="unwatched">
+  <h1>Unwatched Items</h1>
+
+  <% @unwatched.each do |item| %>
+    <div class="item">
+      <p><%= item.title %></p>
+      <%= form_tag "/watch/#{item.id}", method: :post do %>
+        <%= button_tag "Watch" %>
       <% end %>
-    </ul>
-  </div>
-<% end %>
+      <%= link_to "https://auctionet.com/sv/#{item.id}" do %>
+        <%= image_tag item.main_thumb %>
+      <% end %>
+   </div>
+  <% end %>
+</section>

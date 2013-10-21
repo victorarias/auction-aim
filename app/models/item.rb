@@ -8,8 +8,9 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :ends_at, :published_at
 
-  scope :unwatched, ->{ where(watched: false) }
-  scope :watched,   ->{ where(watched: true) }
+  scope :unwatched, ->{ where(watched: false).ordered }
+  scope :watched,   ->{ where(watched: true).ordered  }
+  scope :ordered,   ->{ order("ends_at asc") }
 
   def thumbs
     images.map { |hash| hash[:thumb] }
@@ -17,6 +18,14 @@ class Item < ActiveRecord::Base
 
   def main_thumb
     thumbs.first
+  end
+
+  def watch
+    self.watched = true
+  end
+
+  def unwatch
+    self.watched = false
   end
 
   class << self
