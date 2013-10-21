@@ -6,7 +6,7 @@ describe ItemUpdater do
       allow(client).to receive(:perform_request).and_return File.open("spec/assets/item.json").read
     end
   end
-  subject { ItemUpdater.new(client) }
+  subject(:updater) { ItemUpdater.new(client) }
   let!(:item) { Fabricate :watched_item, id: 100529 };
 
   context "updating" do
@@ -16,20 +16,20 @@ describe ItemUpdater do
 
     it "updates watched items" do
       expect do
-        subject.run
+        updater.run
       end.to change { item.reload; item.bids.count }.by 1
     end
 
     it "does not duplicates bids" do
-      subject.run
+      updater.run
       expect do
-        subject.run
+        updater.run
       end.to_not change { item.reload; item.bids.count }
     end
   end
 
   it "notifies updates" do
     expect(MessageBus).to receive(:publish)
-    subject.run
+    updater.run
   end
 end
