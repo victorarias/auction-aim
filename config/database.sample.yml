@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: auction-aim_development
+  username: victorarias
+  password: 
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: auction-aim_test
+  username: victorarias
+  password: 
+  host: localhost
