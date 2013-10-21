@@ -1,3 +1,5 @@
+require 'auctionet/client'
+
 class ItemImporter
   def initialize(client = Auctionet::Client.new)
     @client = client

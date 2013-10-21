@@ -12,4 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require message-bus.js
 //= require_tree .
+
+$(function() {
+  MessageBus.start();
+
+  MessageBus.callbackInterval = 500;
+  MessageBus.subscribe("/bids", function(data){
+    console.log("hello from subscription");
+    console.log(data);
+  });
+});
+
+
