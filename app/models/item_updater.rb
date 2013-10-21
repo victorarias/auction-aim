@@ -13,6 +13,8 @@ class ItemUpdater
 
         bid = item.bids.build attributes
         bid.save!
+
+        notify(item)
       end
     end
   end
@@ -20,4 +22,8 @@ class ItemUpdater
   private
 
   attr_reader :client
+
+  def notify item
+    MessageBus.publish("/bids", item)
+  end
 end
