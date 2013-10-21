@@ -1,0 +1,14 @@
+<h1>Items</h1>
+
+<ul>
+  <% @items.each do |item| %>
+    <p><%= item.title %></p>
+    <ul>
+      <% item.bids.each do |bid| %>
+        <li>
+          <%= bid.amount %> SEK - <%= bid.timestamp %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</ul>
