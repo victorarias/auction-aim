@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== Requirements
 
-Things you may want to cover:
+ * Redis
+ * PostgreSQL
 
-* Ruby version
+== Recommended
 
-* System dependencies
+  * Ruby 2.0
 
-* Configuration
+== History
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is just a sample app. The idea is to use the Auctionet[http://www.auctionet.se] API to list products and monitor new bids. The realtime communication between the browser and the server is made using the "message_bus" gem[https://github.com/SamSaffron/message_bus] from Discourse.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
