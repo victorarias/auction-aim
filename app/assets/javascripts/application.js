@@ -26,8 +26,13 @@ $(function() {
 
   function updateBids(item_id, bids) {
     list = $("#" + item_id);
+    parent = list.parent();
+
     rendered_bids = render_bids(bids);
     list.empty().append(rendered_bids);
+
+    parent.addClass("focus");
+    setTimeout(function (){ parent.removeClass("focus"); }, 1500);
   }
 
   function render_bids(bids) {

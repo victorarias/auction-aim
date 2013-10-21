@@ -64,6 +64,8 @@ h1 {
   height: 100%;
 }
 
+.item.focus { background-color: #c92c2c; }
+
 .item:hover { background-color: whitesmoke; }
 
 .item img {
