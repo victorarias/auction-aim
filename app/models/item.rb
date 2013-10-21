@@ -42,6 +42,23 @@ class Item < ActiveRecord::Base
       end
     end
 
+
+    def update_watched_items(client = Auctionet::Client.new)
+      watched.each do |item|
+        raw = client.fetch_item item.id
+        sanitized = sanitize raw
+
+        sanitized[:bids_attributes].each do |attributes|
+          next if item.bids.where(external_id: attributes[:external_id]).any?
+
+          bid = item.bids.build attributes
+          bid.save!
+        end
+      end
+    end
+
+    private
+
     def sanitize raw
       RawSanitizer.new(raw).sanitize
     end

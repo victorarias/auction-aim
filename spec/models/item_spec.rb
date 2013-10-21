@@ -40,6 +40,29 @@ describe Item do
     end
   end
 
+  describe "update of watched items" do
+    let(:client) do
+      Auctionet::Client.new.tap do |client|
+        allow(client).to receive(:perform_request).and_return File.open("spec/assets/item.json").read
+      end
+    end
+
+    let!(:item) { Fabricate :watched_item, id: 100529 };
+
+    it "updates watched items" do
+      expect do
+        Item.update_watched_items(client)
+      end.to change { item.reload; item.bids.count }.by 1
+    end
+
+    it "does not duplicate items" do
+      Item.update_watched_items(client)
+      expect do
+        Item.update_watched_items(client)
+      end.to_not change { item.reload; item.bids.count }
+    end
+  end
+
   describe "images" do
     subject do
       Fabricate.build :item, images: [
