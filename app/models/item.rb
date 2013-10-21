@@ -25,4 +25,9 @@ class Item < ActiveRecord::Base
   def unwatch
     self.watched = false
   end
+
+  def as_json(*params)
+    super(only: [:id],
+         include:  :bids )
+  end
 end

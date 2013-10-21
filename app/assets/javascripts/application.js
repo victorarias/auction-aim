@@ -20,9 +20,23 @@ $(function() {
 
   MessageBus.callbackInterval = 500;
   MessageBus.subscribe("/bids", function(data){
-    console.log("hello from subscription");
-    console.log(data);
+    data = JSON.parse(data);
+    updateBids(data.id, data.bids);
   });
+
+  function updateBids(item_id, bids) {
+    list = $("#" + item_id);
+    rendered_bids = render_bids(bids);
+    list.empty().append(rendered_bids);
+  }
+
+  function render_bids(bids) {
+    return bids.map(function(bid) {
+      li = $("<li/>").append(bid.amount.toString() + " SEK");
+      li.css('color', bid.color);
+      return li;
+    });
+  }
 });
 
 
