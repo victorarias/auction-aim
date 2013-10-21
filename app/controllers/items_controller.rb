@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @unwatched = Item.all.to_a
-    @watched = []
+    @unwatched  = Item.unwatched
+    @watched    = Item.watched
   end
 end

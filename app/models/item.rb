@@ -6,12 +6,15 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :ends_at, :published_at
 
+  scope :unwatched, ->{ where(watched: false) }
+  scope :watched, ->{ where(watched: true) }
+
   class << self
     def import(client = Auctionet::Client.new)
       client.fetch.each do |raw|
         sanitized = sanitize(raw)
 
-        next if Item.where(id: sanitized[:id]).count > 0
+        next if Item.where(id: sanitized[:id]).any?
 
         Item.new(sanitized).tap do |item|
           item.watched = false
