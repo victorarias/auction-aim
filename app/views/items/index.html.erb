@@ -10,7 +10,16 @@
         <%= form_tag "/unwatch/#{item.id}", method: :post do %>
           <%= button_tag "Unwatch" %>
         <% end %>
-        <%= image_tag item.main_thumb %>
+
+        <%= link_to "https://auctionet.com/sv/#{item.id}", target: "_blank" do %>
+          <%= image_tag item.main_thumb %>
+        <% end %>
+
+        <ul class="prices">
+          <% item.bids.each do |bid| %>
+            <li style="color: <%= bid.color %>"><%= bid.amount %> SEK</li>
+          <% end %>
+        </ul>
      </div>
     <% end %>
   <% end %>
