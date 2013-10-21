@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def index
-    @unwatched  = Item.unwatched
-    @watched    = Item.watched
+    @unwatched  = Item.unwatched.current
+    @watched    = Item.watched.current
   end
 
   def watch

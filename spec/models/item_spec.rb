@@ -24,6 +24,23 @@ describe Item do
     end
   end
 
+  describe "#current" do
+    it "returns current items" do
+      item = Fabricate :item
+      expect(Item.current.to_a).to match_array([item])
+    end
+
+    it "does not return old items" do
+      item = Fabricate :item, ends_at: 2.days.ago
+      expect(Item.current.to_a).to be_empty
+    end
+
+    it "returns watched old items" do
+      item = Fabricate :watched_item, ends_at: 2.days.ago
+      expect(Item.current.to_a).to match_array([item])
+    end
+  end
+
   describe "#watch" do
     it "makes it watched" do
       expect do

@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
   scope :unwatched, ->{ where(watched: false).ordered }
   scope :watched,   ->{ where(watched: true).ordered  }
   scope :ordered,   ->{ order("ends_at asc") }
+  scope :current,   ->{ where("ends_at > ? OR watched = ?", Time.zone.now, true).ordered }
 
   def thumbs
     images.map { |hash| hash[:thumb] }
