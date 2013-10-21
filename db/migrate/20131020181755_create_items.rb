@@ -9,6 +9,7 @@ class CreateItems < ActiveRecord::Migration
       t.datetime :published_at, null: false
       t.integer :transport_price
       t.boolean :watched, null: false
+      t.text :images
 
       t.timestamps
     end

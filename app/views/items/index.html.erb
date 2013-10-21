@@ -1,8 +1,9 @@
 <h1>Items</h1>
 
-<ul>
-  <% @items.each do |item| %>
+<% @unwatched.each do |item| %>
+  <div>
     <p><%= item.title %></p>
+    <%= image_tag item.main_thumb %>
     <ul>
       <% item.bids.each do |bid| %>
         <li>
@@ -10,5 +11,5 @@
         </li>
       <% end %>
     </ul>
-  <% end %>
-</ul>
+  </div>
+<% end %>

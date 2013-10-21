@@ -27,10 +27,33 @@ describe Item do
       end.to change(Item, :count).by 1
     end
 
-    it "imports nested bids" do
+    it "import nested bids" do
       expect do
         Item.import client
       end.to change { Bid.count }
+    end
+
+    it "import images" do
+      Item.import client
+      first = Item.first
+      expect(first.images).to_not be_empty
+    end
+  end
+
+  describe "images" do
+    subject do
+      Fabricate.build :item, images: [
+        { thumb: "path1", hd: "path_hd1" },
+        { thumb: "path2", hd: "path_hd2" }
+      ]
+    end
+
+    it "filter thumbs" do
+      expect(subject.thumbs).to match_array(["path1", "path2"])
+    end
+
+    it "has a main thumbnail" do
+      expect(subject.main_thumb).to eq "path1"
     end
   end
 end

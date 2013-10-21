@@ -27,6 +27,7 @@ class RawSanitizer
     item.symbolize_keys!
     sanitize_timestamp(item, :ends_at)
     sanitize_timestamp(item, :published_at)
+    item[:images].each { |image| image.symbolize_keys! }
   end
 
   def sanitize_bids(item)

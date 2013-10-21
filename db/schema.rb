@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20131020182040) do
     t.datetime "published_at",    null: false
     t.integer  "transport_price"
     t.boolean  "watched",         null: false
+    t.text     "images"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
