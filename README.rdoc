@@ -1,5 +1,7 @@
 == README
 
+{<img src="https://codeclimate.com/github/victorarias/auction-aim.png" />}[https://codeclimate.com/github/victorarias/auction-aim]
+
 == Requirements
 
  * Redis
